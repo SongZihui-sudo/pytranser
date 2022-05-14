@@ -16,7 +16,7 @@
 ## About
 A cross platform and light translate tool made by python.    
 ### screenshot
-![img](https://user-images.githubusercontent.com/77034643/168419118-d59b6e42-c089-4a1c-ae39-df1d36809c43.png)  
+![img](https://user-images.githubusercontent.com/77034643/168425961-92310029-6b9e-49e4-8b0e-240afe6bd3b3.png)  
 <div align=center><img src="https://user-images.githubusercontent.com/77034643/168418694-12fd4fb3-d642-420f-85bb-b32a7369fcd1.png"></div>
 
 ## Let's Start
@@ -81,13 +81,8 @@ you can make you own theme like this:
 1. new theme
 2. new api
 3. more beautiful gui design  
-4. plugin
-5. solve package error
-   ```
-   _tkinter.TclError: no display name and no $DISPLAY environment variable 
-   and
-   Pyperclip could not find a copy/paste mechanism for your system.
-   ```
+4. plugin    
+   
 in linux
 ```bash
 su root
@@ -99,6 +94,14 @@ python3 transer.py
 ```
 *Welcome to contribute to this project!*  
 I will update and maintain for a long time.
+## known issues
+in linux:  
+```txt
+_tkinter.TclError: no display name and no $DISPLAY environment variable 
+and
+Pyperclip could not find a copy/paste mechanism for your system.
+```
+`su root`before use
 ## last
 If you get a bug about it, please make a issue in github, thanks.
 If you think transer is good, please give me a star, thanks.  
