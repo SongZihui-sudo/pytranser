@@ -1,5 +1,5 @@
 #
-#!A cross platform translate tool made by python
+#!A cross platform and light translate tool made by python
 #
 # Licensed under the GNU GENERAL PUBLIC LICENSE
 #

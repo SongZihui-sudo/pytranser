@@ -1,6 +1,6 @@
-# Transer --A cross platform translate tool
+# Transer --A cross platform and light translate tool
 
-- [Transer --A cross platform translate tool](#transer---a-cross-platform-translate-tool)
+- [Transer --A cross platform and light translate tool](#transer---a-cross-platform-and-light-translate-tool)
   - [About](#about)
     - [screenshot](#screenshot)
   - [Let's Start](#lets-start)
@@ -14,7 +14,7 @@
   - [last](#last)
 
 ## About
-A cross platform translate tool made by python.    
+A cross platform and light translate tool made by python.    
 ### screenshot
 ![img](https://user-images.githubusercontent.com/77034643/168419118-d59b6e42-c089-4a1c-ae39-df1d36809c43.png)  
 <div align=center><img src="https://user-images.githubusercontent.com/77034643/168418694-12fd4fb3-d642-420f-85bb-b32a7369fcd1.png"></div>
