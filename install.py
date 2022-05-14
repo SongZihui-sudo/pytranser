@@ -24,7 +24,7 @@ def main():
         elif platform.system() == "Windows":
             print("system: windows\n")
             os.system("pyinstaller -F transer.py")
-            os.system("copy \".transer.png\" \".\dist\\\"")
+            os.system("copy \"transer.png\" \".\dist\\\"")
             os.system("copy \"config.json\" \".\dist\\\"")
         # mac
         elif platform.system() == "macos":
