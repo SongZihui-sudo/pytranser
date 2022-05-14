@@ -24,12 +24,15 @@ A cross platform and light translate tool made by python.
 1. download the release in the github
 
 2. clone sourse to you local.
+```
+pip install -r requirements.txt
+```
 ```bash
-git clone 
+git clone https://github.com/SongZihui-sudo/transer
 ```
 ### run
 ```bash
-git clone 
+git clone https://github.com/SongZihui-sudo/transer
 sudo python3 transer.py
 ```
 or
