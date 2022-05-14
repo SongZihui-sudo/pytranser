@@ -1,0 +1,40 @@
+{
+    "default_outlanguage":"chinese",
+    "gui":true,
+    "isCovercli":false,
+    "theme":"default",
+    "hotkey":{
+        "translate":"ctrl+alt+z",
+        "open_windows":"ctrl+alt+s"
+    },
+    "themeConfig":{
+        "default": {
+            "theme":"default",
+            "font-color":"#000000",
+            "background-color":"#FFFFFF",
+            "frontground-color":"#FFFFFF",
+            "transparency":0.85
+        }
+    },
+    "api":[
+        {"google":["https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=",
+            "&dj=1&dt=t&dt=bd&dt=qc&dt=rm&dt=ex&dt=at&dt=ss&dt=rw&dt=ld&q=",
+            "&tk=233819.233819"]},
+        {"youdao":[]},
+        {"baidu":[]},
+        {"360":[]}
+    ],
+    "language":
+        {
+            "auto":"auto",
+            "german":"de",
+            "chinese":"zh-CN",
+            "english":"en",
+            "japanese":"ja",
+            "korean":"ko",
+            "frech":"fr",
+            "russian":"ru"
+        },
+    "plugin":[{
+    }]
+}
