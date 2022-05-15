@@ -43,13 +43,7 @@ or
 click `transer`
 ### package
 #### Linux dependence
-*in linux have some error in transer package you can install some packages to solve it*  
-```bash
-xsel
-xclip
-python3-tk
-tk-dev
-``` 
+run install.py   
 ```bash
 python3 install.py  
 (in linux may be you need sudo)
