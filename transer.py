@@ -8,12 +8,17 @@
 # @author      SongZihui-suao
 # @file        transer.py
 #
+from unittest import result
 import pyperclip
 import tkinter
 import keyboard
 import json
 import requests
 import time
+import sys
+import os
+import plugins.trans_pdf.trans_pdf as transPdf
+import re
 
 # global var
 text_res = ""
@@ -49,17 +54,17 @@ class mainWindow:
             "LICENSE:\n"+\
             "GNU GENERAL PUBLIC LICENSE\n" +\
             "github:\n"+\
-            "" 
+            "https://github.com/SongZihui-sudo/transer\n" 
         msg = tkinter.Message(self.aw, text=txt, width = 200, anchor = "w", justify = "left", bg = self.background_color, fg = self.font_color)
         msg.grid(row=0, column=0)    
         return
 
     # creat window
     def creatWindow(self):
+        # main windows
         self.main = tkinter.Tk()
         self.main.geometry('200x300')
         self.main.title("transer")
-        self.main.resizable()
         self.main.attributes("-alpha", self.transparency)
         self.main.config(background = self.background_color)
         self.main.iconphoto(False, tkinter.PhotoImage(file='transer.png'))
@@ -80,6 +85,7 @@ class mainWindow:
         self.searchBottom = tkinter.Button(self.main, text="search", command=lambda: self.requestApi(input.get()), relief="raised")
         self.searchBottom.grid(row=3, column=0)
         
+        # msg show
         srcTip = tkinter.Message(self.main, text="original", font=('Arial', 12), width = 200, anchor = "w", 
         justify = "left", bg = self.background_color, fg = self.font_color)
         srcTip.grid(row=4, column=0)
@@ -90,6 +96,7 @@ class mainWindow:
         self.srcMsg.insert("insert", text_src)
         self.srcMsg.grid(row=5, column=0)
 
+        # res show
         resTip = tkinter.Message(self.main, text="result", font=('Arial', 12), width = 200, anchor = "w", 
         justify = "left", bg = self.background_color, fg = self.font_color)
         resTip.grid(row=6, column=0)
@@ -105,7 +112,7 @@ class mainWindow:
 
     # restart
     def restart(self):
-        self.main.destroy()
+        self.destory()
         self.creatWindow()
         return
 
@@ -157,8 +164,10 @@ class mainWindow:
     # request apis
     def requestApi(self, src):
         if src == "":
-            self.setSrc(getCut())
+            cur = getCut()
+            self.setSrc(cur)
         else:
+            print(src)
             self.setSrc(src)
         
         # google
@@ -176,10 +185,13 @@ class mainWindow:
                     print("error! connect failed!")
                 else:
                     res = json.loads(req.text)
-                    result = self.setResult(res['sentences'][0]['trans'])
+                    result = ""
+                    for i in range(len(res['sentences'])-1):
+                        result += self.setResult(res['sentences'][i]['trans'])
                     print(result)
-            except:
-                print("connect error!")
+                    self.setResult(result)
+            except Exception as e:
+                print(e)
         # youdao
         elif self.curApiname == 'youdao':
             return
@@ -202,6 +214,8 @@ class mainWindow:
             self.creatWindow()
         elif self.json_data['gui'] == False:
             pyperclip.copy(text_res)
+        elif self.json_data['gui'] == True and src and len(sys.argv) > 1:
+            return 0
         else :
             self.restart()
         return
@@ -217,14 +231,35 @@ def getCut():
     return pyperclip.waitForPaste()
 
 # main
-def main():
-    json_data = jsonReader('./config.json')
+def main(): 
+    json_data = jsonReader('./config.json')        
     mainWin = mainWindow(json_data)
-    # wait hotkey
-    while True:
-        mainWin.hotkey()
-        keyboard.wait()
-        # wait 0.1 sec
-        time.sleep(0.1)
-
+    # translate select
+    if len(sys.argv) == 1:
+        # wait hotkey
+        while True:
+            mainWin.hotkey()
+            keyboard.wait()
+            # wait 0.1 sec
+            time.sleep(0.1)
+    # pugins
+    elif len(sys.argv) > 1 and json_data['enablePlugins'] == True:
+        for i in range(len(sys.argv)):
+            if sys.argv[i] == json_data['Args']['output'] == '-s':
+                file = sys.argv[i+1]
+            if sys.argv[i] == json_data['Args']['output'] == '-version':
+                print(json_data['Args']['output']['-version'])
+                return 0
+            if sys.argv[i] == json_data['Args']['trans-pdf']['arg']:
+                p = transPdf.pdf(file)
+                pages = p.getPdfpages()
+                print(len(pages))
+                for i in pages:
+                    mainWin.requestApi(i.extract_text())
+                    res = mainWin.getRes()
+                    p.pdfWriter(res)
+                return 0
+        return 0
+    else:
+        return -1
 main()

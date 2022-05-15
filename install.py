@@ -18,8 +18,8 @@ def main():
         if platform.system() == "Linux":
             print("system: linux\n")
             os.system("sudo pyinstaller -F transer.py")
-            os.system("cp transer.png ./dist/")
-            os.system("cp config.json ./dist/")
+            os.system("sudo cp transer.png ./dist/")
+            os.system("sudo cp config.json ./dist/")
         # windows
         elif platform.system() == "Windows":
             print("system: windows\n")

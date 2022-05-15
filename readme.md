@@ -11,6 +11,9 @@
     - [How to use](#how-to-use)
     - [Config](#config)
   - [Dev](#dev)
+  - [known issues](#known-issues)
+  - [plugins Dev](#plugins-dev)
+  - [Transer's Api](#transers-api)
   - [last](#last)
 
 ## About
@@ -24,7 +27,7 @@ A cross platform and light translate tool made by python.
 1. download the release in the github
 
 2. clone sourse to you local.
-```
+```bash
 pip install -r requirements.txt
 ```
 ```bash
@@ -54,7 +57,8 @@ python3 install.py
 ### How to use  
 Firstly `ctrl+c or ctrl+shift+c` copy what you want to translate
 * `ctrl+alt+z` translate
-* `ctrl+alt+s` open main window
+* `ctrl+alt+s` open main window   
+* `python3 transer.py -s [pdf's path] -pt` or `./transer.py -s [pdf's path] -pt`(in linux you need add sudo)  translate pdf file to txt file.  
 ### Config
 *you can make some configs in the config.json*  
 `default_outlanguage` default output language  
@@ -102,6 +106,47 @@ and
 Pyperclip could not find a copy/paste mechanism for your system.
 ```
 `su root`before use
+## plugins Dev
+*I am going to devlop plugins in this tool.*
+the plugins is in the plugins dir.  
+directory structure:  
+
+---
+plugins |  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; plugin's name |<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;main.py<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;requirements.txt
+
+---
+you can register your p;ugins in config.json.    
+like trans-pdf pugin(which can translate pdf file to a txt)   
+```json
+"trans-pdf":{
+            "arg":"-pt",
+            "file":"./plugins/trans-pdf/trans-pdf.py"
+        },
+```
+`arg` comands args  
+`file` file postion
+```py
+ if sys.argv[i] == json_data['Args']['trans-pdf']['arg']:
+                p = transPdf.pdf(file)
+                pages = p.getPdfpages()
+                print(len(pages))
+                for i in pages:
+                    mainWin.requestApi(i.extract_text())
+                    res = mainWin.getRes()
+                    p.pdfWriter(res)
+                return 0
+```
+add if brancg to add a plugin.  
+## Transer's Api
+1. `mainWindow.destory(void)` reurn void ; destory main window
+2. `mainWindow.getMainwin(void)` return main window obj  
+3. `mainWindow.getSrc(void)` return sourse language's word or sentience
+4. `mainWindow.getRes(void)` return result
+5. `mainWindow.requestApi(src)` return void; make a request; if src == void,transer will translate sentience in the cli.else src,transer will translate src.  
 ## last
 If you get a bug about it, please make a issue in github, thanks.
 If you think transer is good, please give me a star, thanks.  

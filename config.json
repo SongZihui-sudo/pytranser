@@ -2,6 +2,7 @@
     "default_outlanguage":"chinese",
     "gui":true,
     "isCovercli":false,
+    "enablePlugins":true,
     "theme":"default",
     "hotkey":{
         "translate":"ctrl+alt+z",
@@ -35,6 +36,12 @@
             "frech":"fr",
             "russian":"ru"
         },
-    "plugin":[{
-    }]
+    "Args":{
+        "trans-pdf":{
+            "arg":"-pt",
+            "file":"./plugins/trans-pdf/trans-pdf.py"
+        },
+        "output":"-s",
+        "-version":"transer v1.0"
+    }
 }
