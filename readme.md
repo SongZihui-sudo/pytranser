@@ -1,13 +1,19 @@
 # Transer --A cross platform and light translate tool
 
+---
 - [Transer --A cross platform and light translate tool](#transer---a-cross-platform-and-light-translate-tool)
+  - [- last](#--last)
   - [About](#about)
     - [screenshot](#screenshot)
+    - [theme](#theme)
+      - [light](#light)
+      - [dark](#dark)
+      - [blue](#blue)
+      - [highContrast](#highcontrast)
   - [Let's Start](#lets-start)
     - [install](#install)
     - [run](#run)
     - [package](#package)
-      - [Linux dependence](#linux-dependence)
     - [How to use](#how-to-use)
     - [Config](#config)
   - [Dev](#dev)
@@ -15,12 +21,22 @@
   - [plugins Dev](#plugins-dev)
   - [Transer's Api](#transers-api)
   - [last](#last)
-
+---
 ## About
 A cross platform and light translate tool made by python.    
 ### screenshot
 ![img](https://user-images.githubusercontent.com/77034643/168425961-92310029-6b9e-49e4-8b0e-240afe6bd3b3.png)  
-<div align=center><img src="https://user-images.githubusercontent.com/77034643/168418694-12fd4fb3-d642-420f-85bb-b32a7369fcd1.png"></div>
+
+### theme
+#### light
+![light](https://user-images.githubusercontent.com/77034643/168528215-c37284c3-b76d-4e4a-8936-b61556fc305c.png)
+#### dark
+![dark](https://user-images.githubusercontent.com/77034643/168527404-3ced58df-79f7-42e4-80cb-231cbc5b1114.png)
+#### blue
+![blue](https://user-images.githubusercontent.com/77034643/168527512-26e3a9ff-1552-4fd6-8fa3-137064db477e.png)
+#### highContrast
+![highContrast](https://user-images.githubusercontent.com/77034643/168527583-d536398b-caa0-4993-855c-6de98b88fb35.png)  
+*and more theme you make by youself!!!*  
 
 ## Let's Start
 ### install
@@ -42,7 +58,6 @@ python3 transer.py
 or
 click `transer`
 ### package
-#### Linux dependence
 run install.py   
 ```bash
 python3 install.py  
@@ -58,7 +73,7 @@ Firstly `ctrl+c or ctrl+shift+c` copy what you want to translate
 `default_outlanguage` default output language  
 `gui` is open gui mode.if you close the gui,the result will cover clipboard.In the gui mode, the result will not cover the clipboard defaultly.  
 `isCovercli`  up  
-`theme` theme  
+`theme` theme now 
 `hotkey` config about hotkey  
 `themeConfig` custom theme  
 you can make you own theme like this:
@@ -73,7 +88,7 @@ you can make you own theme like this:
 ```
 `api` translate api  
 `language` language  
-`plugin` plugin is in developing
+`plugin` plugin is in developing  
 ## Dev
 *Some devlop directions in the future:*  
 1. new theme
@@ -142,5 +157,7 @@ add if brancg to add a plugin.
 4. `mainWindow.getRes(void)` return result
 5. `mainWindow.requestApi(src)` return void; make a request; if src == void,transer will translate sentience in the cli.else src,transer will translate src.  
 ## last
-If you get a bug about it, please make a issue in github, thanks.
-If you think transer is good, please give me a star, thanks.  
+*If you get a bug about it, please make a issue in github, thanks.  
+If you think transer is good, please give me a star, thanks.*
+  
+---

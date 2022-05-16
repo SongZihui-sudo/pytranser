@@ -8,7 +8,6 @@
 # @author      SongZihui-suao
 # @file        transer.py
 #
-from unittest import result
 import pyperclip
 import tkinter
 import keyboard
@@ -16,9 +15,7 @@ import json
 import requests
 import time
 import sys
-import os
 import plugins.trans_pdf.trans_pdf as transPdf
-import re
 
 # global var
 text_res = ""

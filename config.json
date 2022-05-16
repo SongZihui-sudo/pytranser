@@ -3,14 +3,14 @@
     "gui":true,
     "isCovercli":false,
     "enablePlugins":true,
-    "theme":"highContrast",
+    "theme":"light",
     "hotkey":{
         "translate":"ctrl+alt+z",
         "open_windows":"ctrl+alt+s"
     },
     "themeConfig":{
         "light": {
-            "theme":"default",
+            "theme":"light",
             "font-color":"#000000",
             "background-color":"#FFFFFF",
             "frontground-color":"#FFFFFF",
