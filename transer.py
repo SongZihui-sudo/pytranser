@@ -70,7 +70,7 @@ class mainWindow:
         self.main.iconphoto(False, tkinter.PhotoImage(file='transer.png'))
         
         # about botton
-        self.aboutBottom = tkinter.Button(self.main, text="about", command=lambda: self.about(), relief="raised")
+        self.aboutBottom = tkinter.Button(self.main, text="about", command=lambda: self.about(), relief="raised", fg = self.font_color)
         self.aboutBottom.grid(row=0, column=0)
         
         title = tkinter.Message(self.main, text="transer", font=('Arial', 12), width = 200, anchor = "w", 
@@ -78,11 +78,12 @@ class mainWindow:
         title.grid(row=1, column=0)
 
         # input
-        input = tkinter.Entry(self.main, width=24)
+        input = tkinter.Entry(self.main, width=24, bg = self.background_color, fg = self.font_color)
+        input.configure(insertbackground = self.font_color)
         input.grid(row=2, column=0)
 
         # search botton
-        self.searchBottom = tkinter.Button(self.main, text="search", command=lambda: self.requestApi(input.get()), relief="raised")
+        self.searchBottom = tkinter.Button(self.main, text="search", command=lambda: self.requestApi(input.get()), relief="raised", fg = self.font_color)
         self.searchBottom.grid(row=3, column=0)
         
         # msg show

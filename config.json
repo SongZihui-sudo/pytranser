@@ -3,17 +3,38 @@
     "gui":true,
     "isCovercli":false,
     "enablePlugins":true,
-    "theme":"default",
+    "theme":"highContrast",
     "hotkey":{
         "translate":"ctrl+alt+z",
         "open_windows":"ctrl+alt+s"
     },
     "themeConfig":{
-        "default": {
+        "light": {
             "theme":"default",
             "font-color":"#000000",
             "background-color":"#FFFFFF",
             "frontground-color":"#FFFFFF",
+            "transparency":0.85
+        },
+        "dark":{
+            "theme":"dark",
+            "font-color":"#778899",
+            "background-color":"#000000",
+            "frontground-color":"#000000",
+            "transparency":0.85
+        },
+        "blue":{
+            "theme":"blue",
+            "font-color":"#2F4F4F",
+            "background-color":"#4682B4",
+            "frontground-color":"#4682B4",
+            "transparency":0.85
+        },
+        "highContrast":{
+            "theme":"highContrast",
+            "font-color":"#32CD32",
+            "background-color":"#191970",
+            "frontground-color":"#191970",
             "transparency":0.85
         }
     },
