@@ -52,7 +52,7 @@ git clone https://github.com/SongZihui-sudo/transer
 ### run
 ```bash
 git clone https://github.com/SongZihui-sudo/transer
-sudo root  
+su root  
 python3 transer.py
 ```
 or
