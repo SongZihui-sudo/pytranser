@@ -21,6 +21,7 @@ import plugins.trans_pdf.trans_pdf as transPdf
 text_res = ""
 text_src = ""
 
+
 # main windows
 class mainWindow:
 
@@ -218,6 +219,7 @@ class mainWindow:
             self.restart()
         return
 
+
 # read json
 def jsonReader(path):
     with open(path, 'r', encoding='utf8') as fp:
@@ -248,6 +250,7 @@ def main():
             if sys.argv[i] == json_data['Args']['output'] == '-version':
                 print(json_data['Args']['output']['-version'])
                 return 0
+            # plugin trans-pdf -----------------------------------------------------
             if sys.argv[i] == json_data['Args']['trans-pdf']['arg']:
                 p = transPdf.pdf(file)
                 pages = p.getPdfpages()
@@ -256,6 +259,7 @@ def main():
                     mainWin.requestApi(i.extract_text())
                     res = mainWin.getRes()
                     p.pdfWriter(res)
+            #--------------------------------------------------------------------------
                 return 0
         return 0
     else:
