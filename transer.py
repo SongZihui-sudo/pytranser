@@ -5,7 +5,7 @@
 #
 # Copyright (C) 2022-present, SongZihui-sudo.
 #
-# @author      SongZihui-suao
+# @author      SongZihui-sudo
 # @file        transer.py
 #
 import pyperclip
