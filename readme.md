@@ -68,6 +68,8 @@ Firstly `ctrl+c or ctrl+shift+c` copy what you want to translate
 * `ctrl+alt+z` translate
 * `ctrl+alt+s` open main window   
 * `python3 transer.py -s [pdf's path] -pt` or `./transer.py -s [pdf's path] -pt`(in linux you need add sudo)  translate pdf file to txt file.  
+* `python3 transer.py -l [language]` or `./transer -l [language]` change output language(need restart)  
+* `python3 transer.py -t [theme]` or `./transer -t [theme]` change theme(need restart)  
 ### Config
 *you can make some configs in the config.json*  
 `outLanguage` default output language  
