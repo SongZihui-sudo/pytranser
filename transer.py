@@ -8,6 +8,7 @@
 # @author      SongZihui-sudo
 # @file        transer.py
 #
+from tkinter import ttk
 import pyperclip
 import tkinter
 import keyboard
@@ -38,12 +39,13 @@ class mainWindow:
         self.curApiname = 'google'
         self.src = ""
         self.res = ""
+        self.language = json_data['outLanguage']
         return
 
     # about
     def about(self):
         self.aw = tkinter.Toplevel()
-        self.aw.geometry('200x300')
+        self.aw.geometry('200x320')
         self.aw.iconphoto(False, tkinter.PhotoImage(file='transer.png'))
         txt = "Transer v1.0\n"+ \
             "A linux translate tool\n" + \
@@ -53,7 +55,8 @@ class mainWindow:
             "GNU GENERAL PUBLIC LICENSE\n" +\
             "github:\n"+\
             "https://github.com/SongZihui-sudo/transer\n" 
-        msg = tkinter.Message(self.aw, text=txt, width = 200, anchor = "w", justify = "left", bg = self.background_color, fg = self.font_color)
+        msg = tkinter.Message(self.aw, text=txt, width = 200, anchor = "w", justify = "left", bg = self.background_color, 
+        fg = self.font_color)
         msg.grid(row=0, column=0)    
         return
 
@@ -61,50 +64,52 @@ class mainWindow:
     def creatWindow(self):
         # main windows
         self.main = tkinter.Tk()
-        self.main.geometry('200x300')
+        self.main.geometry('550x340')
         self.main.title("transer")
         self.main.attributes("-alpha", self.transparency)
         self.main.config(background = self.background_color)
         self.main.iconphoto(False, tkinter.PhotoImage(file='transer.png'))
-        
+
         # about botton
-        self.aboutBottom = tkinter.Button(self.main, text="about", command=lambda: self.about(), relief="raised", fg = self.font_color)
-        self.aboutBottom.grid(row=0, column=0)
+        self.aboutBottom = tkinter.Button(self.main, text="about", command=lambda: self.about(), relief="raised", 
+        fg = self.font_color, bg = self.background_color)
+        self.aboutBottom.place(x=0, y=0)
         
         title = tkinter.Message(self.main, text="transer", font=('Arial', 12), width = 200, anchor = "w", 
         justify = "left", bg = self.background_color, fg = self.font_color)
-        title.grid(row=1, column=0)
+        title.place(x=80, y= 0)
 
         # input
-        input = tkinter.Entry(self.main, width=24, bg = self.background_color, fg = self.font_color)
+        input = tkinter.Entry(self.main, width=21, bg = self.background_color, fg = self.font_color)
         input.configure(insertbackground = self.font_color)
-        input.grid(row=2, column=0)
+        input.place(x=1, y=60)
 
         # search botton
-        self.searchBottom = tkinter.Button(self.main, text="search", command=lambda: self.requestApi(input.get()), relief="raised", fg = self.font_color)
-        self.searchBottom.grid(row=3, column=0)
-        
+        self.searchBottom = tkinter.Button(self.main, text="search", command=lambda: self.requestApi(input.get()), 
+        relief="raised", fg = self.font_color, bg = self.background_color)
+        self.searchBottom.place(x=60, y=100)
+
         # msg show
         srcTip = tkinter.Message(self.main, text="original", font=('Arial', 12), width = 200, anchor = "w", 
         justify = "left", bg = self.background_color, fg = self.font_color)
-        srcTip.grid(row=4, column=0)
+        srcTip.place(x=50, y=140)
 
         # src show
         global text_src
-        self.srcMsg = tkinter.Text(self.main, font=('Arial', 12), width=16, height=1, bg = self.background_color, fg = self.font_color)
+        self.srcMsg = tkinter.Text(self.main, font=('Arial', 9), width=22, height=8, bg = self.background_color, fg = self.font_color)
         self.srcMsg.insert("insert", text_src)
-        self.srcMsg.grid(row=5, column=0)
+        self.srcMsg.place(x=1, y=175)
 
         # res show
         resTip = tkinter.Message(self.main, text="result", font=('Arial', 12), width = 200, anchor = "w", 
         justify = "left", bg = self.background_color, fg = self.font_color)
-        resTip.grid(row=6, column=0)
+        resTip.place(x=220, y=0)
 
         # result show
         global text_res
-        self.resMsg = tkinter.Text(self.main, font=('Arial', 12), width=16, height=1, bg = self.background_color, fg = self.font_color)
+        self.resMsg = tkinter.Text(self.main, font=('Arial', 9), width=35, height=15, bg = self.background_color, fg = self.font_color)
         self.resMsg.insert("insert", text_res)
-        self.resMsg.grid(row=7, column=0)
+        self.resMsg.place(x=220, y=40)
 
         self.main.mainloop()
         return self.main
@@ -142,7 +147,6 @@ class mainWindow:
         global text_res
         text_res = res
         self.res = res
-        return self.res
 
     # set src
     def setSrc(self, src):
@@ -150,7 +154,6 @@ class mainWindow:
         global text_src
         text_src = src
         self.src = src
-        return self.src
 
     # get src
     def getSrc(self):
@@ -159,6 +162,14 @@ class mainWindow:
     # get res
     def getRes(self):
         return self.res
+
+    # set language
+    def setLanguage(self, changed):
+        self.language = changed
+
+    # get cur language
+    def getLanguage(self):
+        return self.language
 
     # request apis
     def requestApi(self, src):
@@ -173,7 +184,7 @@ class mainWindow:
         if self.curApiname == 'google':
             parman = self.curApi[self.curApiname][0]
             parman = parman +\
-                self.json_data['language'][self.json_data['default_outlanguage']] +\
+                self.json_data['language'][self.language] +\
                 self.curApi[self.curApiname][1]
             r = parman + self.src +self.curApi[self.curApiname][2]    
             try:
@@ -219,7 +230,6 @@ class mainWindow:
             self.restart()
         return
 
-
 # read json
 def jsonReader(path):
     with open(path, 'r', encoding='utf8') as fp:
@@ -229,6 +239,12 @@ def jsonReader(path):
 # cut version
 def getCut():
     return pyperclip.waitForPaste()
+
+# write json
+def jsonWrite(path, json_data):
+    with open(path,"w") as fp:
+        json.dump(json_data, fp)
+    return 0
 
 # main
 def main(): 
@@ -245,10 +261,18 @@ def main():
     # pugins
     elif len(sys.argv) > 1 and json_data['enablePlugins'] == True:
         for i in range(len(sys.argv)):
-            if sys.argv[i] == json_data['Args']['output'] == '-s':
+            if sys.argv[i] == json_data['Args']['src']:
                 file = sys.argv[i+1]
-            if sys.argv[i] == json_data['Args']['output'] == '-version':
+            if sys.argv[i] == json_data['Args']['output']:
                 print(json_data['Args']['output']['-version'])
+                return 0
+            if sys.argv[i] == json_data['Args']['theme']:
+                json_data['theme'] = sys.argv[i+1]
+                jsonWrite('./config.json', json_data)
+                return 0
+            if sys.argv[i] == json_data['Args']['language']:
+                json_data['outLanguage'] = sys.argv[i+1]
+                jsonWrite('./config.json', json_data)
                 return 0
             # plugin trans-pdf -----------------------------------------------------
             if sys.argv[i] == json_data['Args']['trans-pdf']['arg']:

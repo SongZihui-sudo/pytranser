@@ -29,13 +29,13 @@ A cross platform and light translate tool made by python.
 
 ### theme
 #### light
-![light](https://user-images.githubusercontent.com/77034643/168528215-c37284c3-b76d-4e4a-8936-b61556fc305c.png)
+![light](https://user-images.githubusercontent.com/77034643/168734327-0a2d068e-6259-412e-b28c-7b53eb5bc390.png)
 #### dark
-![dark](https://user-images.githubusercontent.com/77034643/168527404-3ced58df-79f7-42e4-80cb-231cbc5b1114.png)
+![dark](https://user-images.githubusercontent.com/77034643/168734707-25640a39-35e1-4578-8847-7f31f99dd483.png)
 #### blue
-![blue](https://user-images.githubusercontent.com/77034643/168527512-26e3a9ff-1552-4fd6-8fa3-137064db477e.png)
+![blue](https://user-images.githubusercontent.com/77034643/168734790-baddf274-adb1-49e7-9ca4-8c02c130d593.png)
 #### highContrast
-![highContrast](https://user-images.githubusercontent.com/77034643/168527583-d536398b-caa0-4993-855c-6de98b88fb35.png)  
+![highContrast](https://user-images.githubusercontent.com/77034643/168734880-a23bbaf0-7392-402b-9c63-d19c0c4c8b2e.png)  
 *and more theme you make by youself!!!*  
 
 ## Let's Start
@@ -70,7 +70,7 @@ Firstly `ctrl+c or ctrl+shift+c` copy what you want to translate
 * `python3 transer.py -s [pdf's path] -pt` or `./transer.py -s [pdf's path] -pt`(in linux you need add sudo)  translate pdf file to txt file.  
 ### Config
 *you can make some configs in the config.json*  
-`default_outlanguage` default output language  
+`outLanguage` default output language  
 `gui` is open gui mode.if you close the gui,the result will cover clipboard.In the gui mode, the result will not cover the clipboard defaultly.  
 `isCovercli`  up  
 `theme` theme now 
