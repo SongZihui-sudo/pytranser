@@ -9,6 +9,7 @@
 # @file        transer.py
 #
 from tkinter import ttk
+from matplotlib.pyplot import get
 import pyperclip
 import tkinter
 import keyboard
@@ -197,7 +198,8 @@ class mainWindow:
                     res = json.loads(req.text)
                     result = ""
                     for i in range(len(res['sentences'])-1):
-                        result += self.setResult(res['sentences'][i]['trans'])
+                        self.setResult(res['sentences'][i]['trans'])
+                        result+=self.getRes()
                     print(result)
                     self.setResult(result)
             except Exception as e:
