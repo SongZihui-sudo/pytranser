@@ -8,8 +8,6 @@
 # @author      SongZihui-sudo
 # @file        transer.py
 #
-from tkinter import ttk
-from matplotlib.pyplot import get
 import pyperclip
 import tkinter
 import keyboard
@@ -18,6 +16,7 @@ import requests
 import time
 import sys
 import plugins.trans_pdf.trans_pdf as transPdf
+import urllib.parse
 
 # global var
 text_res = ""
@@ -34,10 +33,8 @@ class mainWindow:
         self.frontground_color = json_data['themeConfig'][self.json_data['theme']]['frontground-color']
         self.font_color = json_data['themeConfig'][self.json_data['theme']]['font-color']
         self.transparency = json_data['themeConfig'][self.json_data['theme']]['transparency']
-        # default api
-        self.curApi = json_data['api'][0]
         # default api name
-        self.curApiname = 'google'
+        self.curApiname = json_data['defaultApi']
         self.src = ""
         self.res = ""
         self.language = json_data['outLanguage']
@@ -172,22 +169,30 @@ class mainWindow:
     def getLanguage(self):
         return self.language
 
+    # get api
+    def getApi(self):
+        return self.curApiname
+
+    # set api
+    def setApi(self, changed):
+        self.curApiname = changed
+    
     # request apis
     def requestApi(self, src):
+        result = ""
         if src == "":
             cur = getCut()
             self.setSrc(cur)
         else:
-            print(src)
             self.setSrc(src)
-        
+
         # google
         if self.curApiname == 'google':
-            parman = self.curApi[self.curApiname][0]
+            parman = self.json_data['api'][self.curApiname][0]
             parman = parman +\
                 self.json_data['language'][self.language] +\
-                self.curApi[self.curApiname][1]
-            r = parman + self.src +self.curApi[self.curApiname][2]    
+                self.json_data['api'][self.curApiname][1]
+            r = parman + self.src +self.json_data['api'][self.curApiname][2]    
             try:
                 # request
                 req = requests.get(r)
@@ -196,27 +201,36 @@ class mainWindow:
                     print("error! connect failed!")
                 else:
                     res = json.loads(req.text)
-                    result = ""
                     for i in range(len(res['sentences'])-1):
                         self.setResult(res['sentences'][i]['trans'])
                         result+=self.getRes()
                     print(result)
-                    self.setResult(result)
             except Exception as e:
                 print(e)
         # youdao
         elif self.curApiname == 'youdao':
-            return
-        # baidu
-        elif self.curApiname == 'baidu':
-            return
-        # 360
-        elif self.curApiname == '360':
-            return
+            data = {'from': 'AUTO', 'to': self.getLanguage(), 'smartresult': 'dict', 'client': 'fanyideskweb', 'salt': '1500092479607',
+            'sign': 'c98235a85b213d482b8e65f6b1065e26', 'doctype': 'json', 'version': '2.1', 'keyfrom': 'fanyi.web',
+            'action': 'FY_BY_CL1CKBUTTON', 'typoResult': 'true', 'i': self.getSrc()}
+            data = urllib.parse.urlencode(data).encode('utf-8')
+            try:
+                req = urllib.request.urlopen(self.json_data['api'][self.curApiname][0], data)
+                if(req.code!=200):
+                    print("request error!")
+                    return -1
+                else:
+                    html = req.read().decode('utf-8')
+                    htmlres = json.loads(html)
+                    for i in range(len(htmlres['translateResult'])):
+                        result += htmlres['translateResult'][i][0]['tgt']+"\n"
+                    print(result)
+            except Exception as e:
+                print(e)
         # error
         else:
             print("error! unknown translate api")
-        
+        # set result
+        self.setResult(result)
         # cover cli
         if self.json_data['isCovercli'] == True:
             pyperclip.copy(text_res)
@@ -245,7 +259,7 @@ def getCut():
 # write json
 def jsonWrite(path, json_data):
     with open(path,"w") as fp:
-        json.dump(json_data, fp)
+        json.dump(json_data, fp, indent=4)
     return 0
 
 # main
@@ -263,17 +277,26 @@ def main():
     # pugins
     elif len(sys.argv) > 1 and json_data['enablePlugins'] == True:
         for i in range(len(sys.argv)):
+            # -s pdf source
             if sys.argv[i] == json_data['Args']['src']:
                 file = sys.argv[i+1]
+            # -version version show
             if sys.argv[i] == json_data['Args']['output']:
                 print(json_data['Args']['output']['-version'])
                 return 0
+            # -t change theme
             if sys.argv[i] == json_data['Args']['theme']:
                 json_data['theme'] = sys.argv[i+1]
                 jsonWrite('./config.json', json_data)
                 return 0
+            # -l change language
             if sys.argv[i] == json_data['Args']['language']:
                 json_data['outLanguage'] = sys.argv[i+1]
+                jsonWrite('./config.json', json_data)
+                return 0
+            # -a change api
+            if sys.argv[i] == json_data['Args']['api']:
+                json_data['defaultApi'] = sys.argv[i+1]
                 jsonWrite('./config.json', json_data)
                 return 0
             # plugin trans-pdf -----------------------------------------------------

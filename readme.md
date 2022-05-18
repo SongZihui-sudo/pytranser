@@ -70,6 +70,8 @@ Firstly `ctrl+c or ctrl+shift+c` copy what you want to translate
 * `python3 transer.py -s [pdf's path] -pt` or `./transer.py -s [pdf's path] -pt`(in linux you need add sudo)  translate pdf file to txt file.  
 * `python3 transer.py -l [language]` or `./transer -l [language]` change output language(need restart)  
 * `python3 transer.py -t [theme]` or `./transer -t [theme]` change theme(need restart)  
+* `python3 transer.py -a [api's name]`or`./transer -a ['api's name]` change translation's api  
+* `python3 transer.py -v` or `./transer -v` voice translation in experiment   
 ### Config
 *you can make some configs in the config.json*  
 `outLanguage` default output language  
@@ -77,7 +79,8 @@ Firstly `ctrl+c or ctrl+shift+c` copy what you want to translate
 `isCovercli`  up  
 `theme` theme now 
 `hotkey` config about hotkey  
-`themeConfig` custom theme  
+`themeConfig` custom theme    
+`defaultApi` default api
 you can make you own theme like this:
 ```json
 "theme name":{
@@ -158,6 +161,10 @@ add if brancg to add a plugin.
 3. `mainWindow.getSrc(void)` return sourse language's word or sentience
 4. `mainWindow.getRes(void)` return result
 5. `mainWindow.requestApi(src)` return void; make a request; if src == void,transer will translate sentience in the cli.else src,transer will translate src.  
+6. `mainWindow.getApi(void)` return using translation api now  
+7. `mainWindow.setApi(changed)` set translation api
+8. `mainWindow.setLanguage(changed)` set output language  
+9. `mainWindow.getLanguage(void)` return now output language  
 ## last
 *If you get a bug about it, please make a issue in github, thanks.  
 If you think transer is good, please give me a star, thanks.*
