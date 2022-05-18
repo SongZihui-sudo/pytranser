@@ -1,4 +1,4 @@
-# Transer --A cross platform and light translate tool
+# Pytranser --A cross platform and light translate tool
 
 ---
 - [Transer --A cross platform and light translate tool](#transer---a-cross-platform-and-light-translate-tool)
