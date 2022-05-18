@@ -47,11 +47,11 @@ A cross platform and light translate tool made by python.
 pip install -r requirements.txt
 ```
 ```bash
-git clone https://github.com/SongZihui-sudo/transer
+git clone https://github.com/SongZihui-sudo/pytranser
 ```
 ### run
 ```bash
-git clone https://github.com/SongZihui-sudo/transer
+git clone https://github.com/SongZihui-sudo/pytranser
 su root  
 python3 transer.py
 ```
